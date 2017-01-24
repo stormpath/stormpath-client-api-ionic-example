@@ -1,0 +1,41 @@
+<template #authport>
+    <div *ngIf="(user$ | async) === false">
+      <div *ngIf="loginService.forgot">
+        <ion-header>
+          <ion-navbar>
+            <ion-title>
+              Forgot Password
+            </ion-title>
+          </ion-navbar>
+        </ion-header>
+        <ionic-forgot-password-form></ionic-forgot-password-form>
+      </div>
+      <div *ngIf="loginService.login">
+        <ion-header>
+          <ion-navbar>
+            <ion-title>
+              Login or <a href="" (click)="showRegister(); false">Create Account</a>
+            </ion-title>
+          </ion-navbar>
+        </ion-header>
+        <ionic-login-form></ionic-login-form>
+      </div>
+      <div *ngIf="loginService.register">
+        <ion-header>
+          <ion-navbar>
+            <ion-title>
+              Create Account
+            </ion-title>
+          </ion-navbar>
+        </ion-header>
+        <ionic-register-form autoLogin="true"></ionic-register-form>
+      </div>
+    </div>
+</template>
+
+<sp-authport [customTemplate]="authport"></sp-authport>
+
+<div [hidden]="!(user$ | async)">
+  <ion-nav [root]="rootPage"></ion-nav>
+</div>
+
