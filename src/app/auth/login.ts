@@ -22,6 +22,7 @@ import { LoginComponent } from 'angular-stormpath';
         <div *ngIf="error" class="alert alert-danger">{{error}}</div>
         <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login</button>
         <button ion-button class="forgot-btn" type="button" block clear (click)="forgot()">Forgot Password?</button>
+        <button ion-button class="create-btn" type="button" block clear (click)="showRegister()">Create Account</button>
       </ion-col>
     </ion-row>
   </form>
@@ -29,4 +30,8 @@ import { LoginComponent } from 'angular-stormpath';
 })
 export class LoginPage extends LoginComponent {
 
+  showRegister(): void {
+    this.loginService.forgot = this.loginService.login = false;
+    this.loginService.register = true;
+  }
 }
