@@ -6,10 +6,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { StormpathConfiguration, StormpathModule } from 'angular-stormpath';
-import { BeerListPage } from '../pages/beer-list/beer-list';
-import { IonicLoginComponent } from './auth/ionic.login.component'
-import { IonicRegisterComponent } from './auth/ionic.register.component';
-import { IonicForgotPasswordComponent } from './auth/ionic.forgot.password.component';
+import { LoginPage, RegisterPage, ForgotPasswordPage } from './auth/index';
 
 export function stormpathConfig(): StormpathConfiguration {
   let spConfig: StormpathConfiguration = new StormpathConfiguration();
@@ -24,10 +21,9 @@ export function stormpathConfig(): StormpathConfiguration {
     ContactPage,
     HomePage,
     TabsPage,
-    BeerListPage,
-    IonicLoginComponent,
-    IonicRegisterComponent,
-    IonicForgotPasswordComponent
+    LoginPage,
+    RegisterPage,
+    ForgotPasswordPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -39,11 +35,7 @@ export function stormpathConfig(): StormpathConfiguration {
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,
-    BeerListPage,
-    IonicLoginComponent,
-    IonicRegisterComponent,
-    IonicForgotPasswordComponent
+    TabsPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

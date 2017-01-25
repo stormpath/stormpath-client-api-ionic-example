@@ -4,7 +4,6 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthPortComponent, Stormpath, LoginService } from 'angular-stormpath';
-import { IonicLoginComponent, IonicRegisterComponent } from './auth/index';
 
 @Component({
   templateUrl: 'app.html'

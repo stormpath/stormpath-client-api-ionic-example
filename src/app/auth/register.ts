@@ -1,7 +1,8 @@
 import { RegisterComponent, LoginService, Stormpath } from 'angular-stormpath';
 import { Component } from '@angular/core';
+
 @Component({
-  selector: 'ionic-register-form',
+  selector: 'ion-register-form',
   template: `<ion-card-content class="stormpath-form">
   <form *ngIf="!registered" (ngSubmit)="onSubmit()" autocomplete="off" #registerForm="ngForm">
     <ion-row>
@@ -31,7 +32,7 @@ import { Component } from '@angular/core';
   </p>
 </ion-card-content>`
 })
-export class IonicRegisterComponent extends RegisterComponent {
+export class RegisterPage extends RegisterComponent {
 
   constructor(stormpath: Stormpath, private loginService: LoginService) {
     super(stormpath);

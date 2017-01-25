@@ -2,7 +2,7 @@ import { ForgotPasswordComponent, Stormpath, LoginService } from 'angular-stormp
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ionic-forgot-password-form',
+  selector: 'ion-forgot-password-form',
   template: `<ion-card-content class="stormpath-form">
   <p *ngIf="sent" class="alert alert-success">
     We have sent a password reset link to the email address of the account that you specified.
@@ -30,7 +30,7 @@ import { Component } from '@angular/core';
   </ion-row>
 </ion-card-content>`
 })
-export class IonicForgotPasswordComponent extends ForgotPasswordComponent {
+export class ForgotPasswordPage extends ForgotPasswordComponent {
 
   constructor(stormpath: Stormpath, private loginService: LoginService) {
     super(stormpath);

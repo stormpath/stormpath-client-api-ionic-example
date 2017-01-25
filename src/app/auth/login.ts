@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import 'rxjs/add/operator/map';
-import { LoginComponent, Stormpath, LoginService } from 'angular-stormpath';
+import { LoginComponent } from 'angular-stormpath';
 
 @Component({
-  selector: 'ionic-login-form',
+  selector: 'ion-login-form',
   template: `<ion-card-content class="stormpath-form">
   <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" autocomplete="off">
     <ion-row>
@@ -28,6 +27,6 @@ import { LoginComponent, Stormpath, LoginService } from 'angular-stormpath';
   </form>
 </ion-card-content>`
 })
-export class IonicLoginComponent extends LoginComponent {
+export class LoginPage extends LoginComponent {
 
 }
