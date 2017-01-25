@@ -20,4 +20,7 @@
     Take a look at the <code>src/pages/</code> directory to add or change tabs,
     update any existing page or create new pages.
   </p>
+  <p *ngIf="(user$ | async)">
+    You are logged in as: <b>{{ ( user$ | async ).fullName }}</b>
+  </p>
 </ion-content>

@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
-import { Stormpath } from 'angular-stormpath';
+import { Stormpath, Account } from 'angular-stormpath';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+  user$: Observable<Account | boolean>;
 
-  constructor(public navCtrl: NavController, private stormpath: Stormpath) {
+  constructor(private stormpath: Stormpath) {
+    this.user$ = this.stormpath.user$;
   }
 
   logout(): void {
