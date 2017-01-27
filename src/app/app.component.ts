@@ -3,21 +3,44 @@ import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
-import { AuthPortComponent, Stormpath, LoginService } from 'angular-stormpath';
+import { Stormpath, LoginService, Account } from 'angular-stormpath';
+import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp extends AuthPortComponent {
+export class MyApp {
   rootPage = TabsPage;
+  user$: Observable<Account | boolean>;
+  loggedIn$: Observable<boolean>;
+  login: boolean;
+  register: boolean;
 
-  constructor(stormpath: Stormpath, loginService: LoginService, platform: Platform) {
-    super(stormpath, loginService);
+  constructor(private stormpath: Stormpath, private loginService: LoginService, platform: Platform) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
+  }
+
+  ngOnInit(): void {
+    this.login = true;
+    this.register = false;
+    this.user$ = this.stormpath.user$;
+    this.loggedIn$ = this.user$.map(user => !!user);
+  }
+
+  showLogin(): void {
+    this.login = !(this.register = false);
+  }
+
+  showRegister(): void {
+    this.register = !(this.login = false);
+  }
+
+  logout(): void {
+    this.stormpath.logout();
   }
 }

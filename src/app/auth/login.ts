@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
-import { LoginComponent } from 'angular-stormpath';
+import { Account, LoginFormModel, Stormpath, LoginService, StormpathErrorResponse } from 'angular-stormpath';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ion-login-form',
   template: `<ion-card-content class="stormpath-form">
+  <div class="text-center">
+    <img src="assets/imgs/logo.png" class="logo">
+  </div>
   <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" autocomplete="off">
     <ion-row>
       <ion-col>
@@ -28,10 +32,38 @@ import { LoginComponent } from 'angular-stormpath';
   </form>
 </ion-card-content>`
 })
-export class LoginPage extends LoginComponent {
+export class LoginPage {
+  loginFormModel: LoginFormModel;
+  user$: Observable<Account | boolean>;
+  loggedIn$: Observable<boolean>;
+  error: string;
 
   showRegister(): void {
     this.loginService.forgot = this.loginService.login = false;
     this.loginService.register = true;
+  }
+
+  constructor(public stormpath: Stormpath, public loginService: LoginService) {
+  }
+
+  ngOnInit(): void {
+    this.user$ = this.stormpath.user$;
+    this.loggedIn$ = this.user$.map(user => !!user);
+    this.loginFormModel = {
+      login: '',
+      password: ''
+    };
+  }
+
+  login(form: any): void {
+    this.error = null;
+    this.stormpath.login(this.loginFormModel)
+      .subscribe(null, (error: StormpathErrorResponse) => {
+        this.error = error.message;
+      });
+  }
+
+  forgot(): void {
+    this.loginService.forgotPassword();
   }
 }

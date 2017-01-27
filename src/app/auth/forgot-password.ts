@@ -1,5 +1,5 @@
-import { ForgotPasswordComponent, Stormpath, LoginService } from 'angular-stormpath';
-import { Component } from '@angular/core';
+import { ForgotPasswordFormModel, StormpathErrorResponse, Stormpath, LoginService } from 'angular-stormpath';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ion-forgot-password-form',
@@ -30,14 +30,34 @@ import { Component } from '@angular/core';
   </ion-row>
 </ion-card-content>`
 })
-export class ForgotPasswordPage extends ForgotPasswordComponent {
+export class ForgotPasswordPage implements OnInit {
+  private forgotPasswordFormModel: ForgotPasswordFormModel;
+  error: string;
+  sent: boolean;
 
-  constructor(stormpath: Stormpath, private loginService: LoginService) {
-    super(stormpath);
+  constructor(private stormpath: Stormpath, private loginService: LoginService) {
+    this.sent = false;
   }
 
   showLogin(): void {
     this.loginService.forgot = this.loginService.register = false;
     this.loginService.login = true;
+  }
+
+  ngOnInit(): void {
+    this.forgotPasswordFormModel = {
+      email: ''
+    };
+  }
+
+  send(): void {
+    this.error = null;
+    this.stormpath.sendPasswordResetEmail(this.forgotPasswordFormModel)
+      .subscribe(() => this.sent = true,
+        (error: StormpathErrorResponse) => this.error = error.message);
+  }
+
+  onSubmit(form: any): void {
+    this.send();
   }
 }

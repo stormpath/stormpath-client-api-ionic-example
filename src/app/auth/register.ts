@@ -1,5 +1,6 @@
-import { RegisterComponent, LoginService, Stormpath } from 'angular-stormpath';
-import { Component } from '@angular/core';
+import { Account, LoginService, LoginFormModel, RegistrationFormModel, Stormpath } from 'angular-stormpath';
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ion-register-form',
@@ -32,14 +33,60 @@ import { Component } from '@angular/core';
   </p>
 </ion-card-content>`
 })
-export class RegisterPage extends RegisterComponent {
+export class RegisterPage implements OnInit {
+  @Input() autoLogin: boolean;
+  model: Object;
+  error: string;
+  viewModel$: Observable<Object>;
+  formModel: RegistrationFormModel;
+  unverified: boolean;
+  canLogin: boolean;
+  registered: boolean;
 
-  constructor(stormpath: Stormpath, private loginService: LoginService) {
-    super(stormpath);
+  constructor(private stormpath: Stormpath, private loginService: LoginService) {
+    this.unverified = false;
+    this.canLogin = false;
+    this.formModel = {
+      email: '',
+      surname: '',
+      givenName: '',
+      password: ''
+    };
   }
 
   showLogin(): void {
     this.loginService.forgot = this.loginService.register = false;
     this.loginService.login = true;
+  }
+
+  ngOnInit(): void {
+    this.stormpath.getRegistrationViewModel()
+      .subscribe(model => {
+          this.model = model;
+        }, error =>
+          this.error = error.message
+      );
+  }
+
+  register(): void {
+    this.stormpath.register(this.formModel)
+      .subscribe((account: Account) => {
+        this.registered = true;
+        this.unverified = account.status === 'UNVERIFIED';
+        this.canLogin = account.status === 'ENABLED';
+
+        if (this.canLogin && this.autoLogin) {
+          let loginAttempt: LoginFormModel = {
+            login: this.formModel.email,
+            password: this.formModel.password
+          };
+
+          this.stormpath.login(loginAttempt);
+        }
+      }, error => this.error = error.message);
+  }
+
+  onSubmit(): void {
+    this.register();
   }
 }

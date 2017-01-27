@@ -1,39 +1,35 @@
-<template #authport>
-  <div *ngIf="(user$ | async) === false">
-    <div *ngIf="loginService.forgot">
-      <ion-header>
-        <ion-navbar>
-          <ion-title>
-            Forgot Password
-          </ion-title>
-        </ion-navbar>
-      </ion-header>
-      <ion-forgot-password-form></ion-forgot-password-form>
-    </div>
-    <div *ngIf="loginService.login">
-      <ion-header>
-        <ion-navbar>
-          <ion-title>
-            Login
-          </ion-title>
-        </ion-navbar>
-      </ion-header>
-      <ion-login-form></ion-login-form>
-    </div>
-    <div *ngIf="loginService.register">
-      <ion-header>
-        <ion-navbar>
-          <ion-title>
-            Create Account
-          </ion-title>
-        </ion-navbar>
-      </ion-header>
-      <ion-register-form autoLogin="true"></ion-register-form>
-    </div>
+<div *ngIf="(user$ | async) === false">
+  <div *ngIf="loginService.forgot">
+    <ion-header>
+      <ion-navbar>
+        <ion-title>
+          Forgot Password
+        </ion-title>
+      </ion-navbar>
+    </ion-header>
+    <ion-forgot-password-form></ion-forgot-password-form>
   </div>
-</template>
-
-<sp-authport [customTemplate]="authport"></sp-authport>
+  <div *ngIf="loginService.login">
+    <ion-header>
+      <ion-navbar>
+        <ion-title>
+          Login
+        </ion-title>
+      </ion-navbar>
+    </ion-header>
+    <ion-login-form></ion-login-form>
+  </div>
+  <div *ngIf="loginService.register">
+    <ion-header>
+      <ion-navbar>
+        <ion-title>
+          Create Account
+        </ion-title>
+      </ion-navbar>
+    </ion-header>
+    <ion-register-form autoLogin="true"></ion-register-form>
+  </div>
+</div>
 
 <div [hidden]="!(user$ | async)">
   <ion-nav [root]="rootPage"></ion-nav>

@@ -10,7 +10,7 @@ import { LoginPage, RegisterPage, ForgotPasswordPage } from './auth/index';
 
 export function stormpathConfig(): StormpathConfiguration {
   let spConfig: StormpathConfiguration = new StormpathConfiguration();
-  spConfig.endpointPrefix = 'https://raible.apps.stormpath.io';
+  spConfig.endpointPrefix = 'https://pwa-server-unsagging-chloride.cfapps.io';
   return spConfig;
 }
 
