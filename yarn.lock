@@ -156,9 +156,9 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-angular-stormpath@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/angular-stormpath/-/angular-stormpath-0.1.1.tgz#3a219d5df987af01c8419b82a5a483705462f63c"
+angular-stormpath@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/angular-stormpath/-/angular-stormpath-0.1.2.tgz#ee3cb75e3c63a2ce12498a83c527d3a73f399359"
   dependencies:
     "@angular/core" "^2.4.0"
     "@angular/forms" "^2.4.0"
