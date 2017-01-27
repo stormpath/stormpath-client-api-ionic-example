@@ -39,4 +39,9 @@ import { Component } from '@angular/core';
 </ion-content>`
 })
 export class RegisterPage extends RegisterComponent {
+
+  // fix for view model not always loading
+  ionViewDidLoad(): void {
+    super.ngOnInit();
+  }
 }
