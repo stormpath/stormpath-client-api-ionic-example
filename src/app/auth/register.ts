@@ -1,7 +1,5 @@
-import { RegisterComponent, Stormpath } from 'angular-stormpath';
+import { RegisterComponent } from 'angular-stormpath';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { LoginPage } from './login';
 
 @Component({
   selector: 'page-register',

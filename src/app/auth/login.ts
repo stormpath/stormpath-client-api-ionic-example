@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { LoginComponent, Stormpath, LoginService } from 'angular-stormpath';
 import { NavController } from 'ionic-angular';
 import { RegisterPage } from './register';
@@ -19,10 +19,12 @@ import { ForgotPasswordPage } from './forgot-password';
       <ion-col>
         <ion-list inset>
           <ion-item>
-            <ion-input placeholder="Email" name="login" id="loginField" type="text" required [(ngModel)]="loginFormModel.login"></ion-input>
+            <ion-input placeholder="Email" name="login" id="loginField" type="text" 
+              required [(ngModel)]="loginFormModel.login" #email></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input placeholder="Password" name="password" id="passwordField" type="password" required [(ngModel)]="loginFormModel.password"></ion-input>
+            <ion-input placeholder="Password" name="password" id="passwordField" 
+              type="password" required [(ngModel)]="loginFormModel.password"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -39,9 +41,16 @@ import { ForgotPasswordPage } from './forgot-password';
 </ion-content>`
 })
 export class LoginPage extends LoginComponent {
+  @ViewChild('email') email;
 
   constructor(stormpath: Stormpath, loginService: LoginService, private nav: NavController) {
     super(stormpath, loginService);
+  }
+
+  ionViewDidLoad() {
+    setTimeout(() => {
+      this.email.setFocus();
+    },150);
   }
 
   register() {

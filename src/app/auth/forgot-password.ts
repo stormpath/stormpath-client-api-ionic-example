@@ -1,7 +1,5 @@
-import { ForgotPasswordComponent, Stormpath } from 'angular-stormpath';
+import { ForgotPasswordComponent } from 'angular-stormpath';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { LoginPage } from './login';
 
 @Component({
   selector: 'page-forgot-password',
@@ -24,7 +22,7 @@ import { LoginPage } from './login';
       <ion-list inset>
         <ion-item>
           <ion-input name="email" type="email" id="spEmail" [(ngModel)]="forgotPasswordFormModel.email"
-                 placeholder="Your Email Address" [disabled]="posting" required></ion-input>
+                 placeholder="Your Email Address" [disabled]="posting" required #email></ion-input>
         </ion-item>
       </ion-list>
       <ion-row>
