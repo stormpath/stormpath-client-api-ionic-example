@@ -1,9 +1,19 @@
 import { Component } from '@angular/core';
-import { LoginComponent } from 'angular-stormpath';
+import { LoginComponent, Stormpath, LoginService } from 'angular-stormpath';
+import { NavController } from 'ionic-angular';
+import { RegisterPage } from './register';
+import { ForgotPasswordPage } from './forgot-password';
 
 @Component({
-  selector: 'ion-login-form',
-  template: `<ion-card-content class="stormpath-form">
+  selector: 'page-login',
+  template: `<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
   <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" autocomplete="off">
     <ion-row>
       <ion-col>
@@ -22,16 +32,23 @@ import { LoginComponent } from 'angular-stormpath';
         <div *ngIf="error" class="alert alert-danger">{{error}}</div>
         <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login</button>
         <button ion-button class="forgot-btn" type="button" block clear (click)="forgot()">Forgot Password?</button>
-        <button ion-button class="create-btn" type="button" block clear (click)="showRegister()">Create Account</button>
+        <button ion-button class="create-btn" type="button" block clear (click)="register()">Create Account</button>
       </ion-col>
     </ion-row>
   </form>
-</ion-card-content>`
+</ion-content>`
 })
 export class LoginPage extends LoginComponent {
 
-  showRegister(): void {
-    this.loginService.forgot = this.loginService.login = false;
-    this.loginService.register = true;
+  constructor(stormpath: Stormpath, loginService: LoginService, private nav: NavController) {
+    super(stormpath, loginService);
+  }
+
+  register() {
+    this.nav.push(RegisterPage);
+  }
+
+  forgot() {
+    this.nav.push(ForgotPasswordPage);
   }
 }

@@ -1,9 +1,18 @@
-import { RegisterComponent, LoginService, Stormpath } from 'angular-stormpath';
+import { RegisterComponent, Stormpath } from 'angular-stormpath';
 import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { LoginPage } from './login';
 
 @Component({
-  selector: 'ion-register-form',
-  template: `<ion-card-content class="stormpath-form">
+  selector: 'page-register',
+  template: `<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Create Account
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
   <form *ngIf="!registered" (ngSubmit)="onSubmit()" autocomplete="off" #registerForm="ngForm">
     <ion-row>
       <ion-col>
@@ -19,7 +28,6 @@ import { Component } from '@angular/core';
       <ion-col>
         <div *ngIf="error" class="alert alert-danger">{{error}}</div>
         <button ion-button type="submit" full [disabled]="!registerForm.form.valid">Register</button>
-        <button ion-button type="button" block clear (click)="showLogin()">Cancel</button>
       </ion-col>
     </ion-row>
   </form>
@@ -30,16 +38,7 @@ import { Component } from '@angular/core';
   <p class="alert alert-success" *ngIf="canLogin">
     Your account has been created, you may now log in.
   </p>
-</ion-card-content>`
+</ion-content>`
 })
 export class RegisterPage extends RegisterComponent {
-
-  constructor(stormpath: Stormpath, private loginService: LoginService) {
-    super(stormpath);
-  }
-
-  showLogin(): void {
-    this.loginService.forgot = this.loginService.register = false;
-    this.loginService.login = true;
-  }
 }

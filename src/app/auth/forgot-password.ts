@@ -1,9 +1,18 @@
-import { ForgotPasswordComponent, Stormpath, LoginService } from 'angular-stormpath';
+import { ForgotPasswordComponent, Stormpath } from 'angular-stormpath';
 import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { LoginPage } from './login';
 
 @Component({
-  selector: 'ion-forgot-password-form',
-  template: `<ion-card-content class="stormpath-form">
+  selector: 'page-forgot-password',
+  template: `<ion-header>
+<ion-navbar>
+  <ion-title>
+    Forgot Password
+  </ion-title>
+</ion-navbar>
+</ion-header>
+<ion-content padding>
   <p *ngIf="sent" class="alert alert-success">
     We have sent a password reset link to the email address of the account that you specified.
     Please check your email for this message, then click on the link.<br>
@@ -22,22 +31,12 @@ import { Component } from '@angular/core';
         <ion-col>
           <p class="text-danger" *ngIf="error">{{error}}</p>
           <button ion-button type="submit" full [disabled]="!registerForm.form.valid || posting">Request Password Reset</button>
-          <button ion-button type="button" block clear (click)="showLogin()">Cancel</button>
         </ion-col>
       </ion-row>
     </form>
     </ion-col>
   </ion-row>
-</ion-card-content>`
+</ion-content>`
 })
 export class ForgotPasswordPage extends ForgotPasswordComponent {
-
-  constructor(stormpath: Stormpath, private loginService: LoginService) {
-    super(stormpath);
-  }
-
-  showLogin(): void {
-    this.loginService.forgot = this.loginService.register = false;
-    this.loginService.login = true;
-  }
 }
