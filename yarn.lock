@@ -148,9 +148,9 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-angular-stormpath@^0.1.2:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/angular-stormpath/-/angular-stormpath-0.1.4.tgz#d6456db617ebe400a231e22302a8f449352f9721"
+angular-stormpath@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/angular-stormpath/-/angular-stormpath-0.1.5.tgz#3004655227f1cea27292d9781954f973bf5066cf"
   dependencies:
     angular2-cookie "^1.2.6"
     ng2-webstorage "1.4.3"

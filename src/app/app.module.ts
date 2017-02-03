@@ -5,10 +5,10 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { StormpathConfiguration, StormpathModule } from 'angular-stormpath';
-import { LoginPage } from '../pages/auth/login/login';
-import { ForgotPasswordPage } from '../pages/auth/forgot/forgot';
-import { RegisterPage } from '../pages/auth/register/register';
+import {
+  StormpathConfiguration, StormpathModule, StormpathIonicModule,
+  LoginPage, ForgotPasswordPage, RegisterPage
+} from 'angular-stormpath';
 
 export function stormpathConfig(): StormpathConfiguration {
   let spConfig: StormpathConfiguration = new StormpathConfiguration();
@@ -22,14 +22,12 @@ export function stormpathConfig(): StormpathConfiguration {
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,
-    LoginPage,
-    ForgotPasswordPage,
-    RegisterPage
+    TabsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    StormpathModule
+    StormpathModule,
+    StormpathIonicModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
