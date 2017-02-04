@@ -5,10 +5,8 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import {
-  StormpathConfiguration, StormpathModule, StormpathIonicModule,
-  LoginPage, ForgotPasswordPage, RegisterPage
-} from 'angular-stormpath';
+import { StormpathConfiguration, StormpathModule } from 'angular-stormpath';
+import { StormpathIonicModule, LoginPage, ForgotPasswordPage, RegisterPage } from 'angular-stormpath-ionic';
 
 export function stormpathConfig(): StormpathConfiguration {
   let spConfig: StormpathConfiguration = new StormpathConfiguration();
